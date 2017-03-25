@@ -1,5 +1,5 @@
 # --*-- coding: utf-8 --*--
-# author: zwei
+# author: lixx
 # email: lilingxing20@163.com
 import eventlet
 from eventlet.green import urllib2
