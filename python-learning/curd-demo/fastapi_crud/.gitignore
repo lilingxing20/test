@@ -1,0 +1,51 @@
+# 忽略Python编译产生的文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 忽略虚拟环境
+venv/
+.env/
+.venv/
+
+# 忽略IDE配置文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 忽略操作系统文件
+.DS_Store
+Thumbs.db
+
+# 忽略日志文件
+*.log
+
+# 忽略打包文件
+*.egg-info/
+build/
+dist/
+
+# 忽略敏感信息
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 忽略数据库文件
+*.sqlite3
+*.db
+
+# 忽略测试覆盖率报告
+htmlcov/
+.coverage
+
+# 忽略缓存
+.cache/
+
+# 忽略其他临时文件
+*.tmp
+*.temp
+*.bak
