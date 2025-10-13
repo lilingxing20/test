@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang=en><meta charset="utf-8"><title>Sanic User Guide - The lightning-fast asynchronous Python web framework</title><meta name=viewport content="width=device-width,initial-scale=1"><link href="/assets/code.css" rel=stylesheet><link href="/assets/style.css" rel=stylesheet><script src="/assets/docs.js" defer></script><script src="https://unpkg.com/htmx.org@1.9.2/dist/htmx.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script><meta name="theme-color" content="#ff0d68"><meta name=title content="Sanic User Guide - The lightning-fast asynchronous Python web framework"><meta name=description content="Sanic is a Python 3.9+ web server and web framework that's written to go fast."><link rel=icon href="/favicon.ico" sizes=any><link rel=icon href="/favicon-32x32.png" type="image/png"><link rel=icon href="/favicon-16x16.png" type="image/png"><link rel="apple-touch-icon" sizes=180x180 href="/apple-touch-icon.png"><link rel=manifest href="/site.webmanifest"><link rel="android-chrome" sizes=192x192 href="/android-chrome-192x192.png"><link rel="android-chrome" sizes=512x512 href="/android-chrome-512x512.png"><meta name="msapplication-config" content="/browserconfig.xml"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><meta name="theme-color" content="#ff0d68"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff0d68"><script async defer data-website-id="0131e426-4d6d-476b-a84b-34a45e0be6de" src="https://analytics.sanicframework.org/umami.js"></script><section class=sponsors>Secure, auto-document, and monetize your Sanic API with Zuplo<a href="https://zuplo.com/integrations/sanic?utm_source=sanic&amp;utm_medium=web&amp;utm_campaign=opensource" target="_blank" class="button is-primary is-small">Start free</a></section><section class="hero is-large has-text-centered"><div class="hero-body"><h1 class=title><span>Sanic</span></h1><h2 class=subtitle>Build fast. Run fast.</h2><h3 class=tagline>Accelerate your web app development</h3><div class="buttons is-centered"><a class="button is-primary" href="/en/guide/getting-started.html">Get Started</a><a class="button is-outlined" href="/en/help.html">Help</a><a class="button is-outlined" href="https://github.com/sanic-org/sanic" target="_blank">GitHub</a></div></div></section><div class="home container"><h3 id="-the-lightning-fast-asynchronous-python-web-framework" class="is-size-3-desktop is-size-5-touch">⚡ The lightning-fast asynchronous Python web framework<a href="#-the-lightning-fast-asynchronous-python-web-framework" class="anchor">#</a></h3><div class="additional-attributes columns is-multiline mt-6"><div class="additional-attributes column is-4"><h4 id="simple-and-lightweight" class="is-size-4-desktop is-size-6-touch">Simple and lightweight<a href="#simple-and-lightweight" class="anchor">#</a></h4><p>Intuitive API with smart defaults and no bloat allows you to get straight to work building your app.</p>
+</div><div class="additional-attributes column is-4"><h4 id="unopinionated-and-flexible" class="is-size-4-desktop is-size-6-touch">Unopinionated and flexible<a href="#unopinionated-and-flexible" class="anchor">#</a></h4><p>Build the way you want to build without letting your tooling constrain you.</p>
+</div><div class="additional-attributes column is-4"><h4 id="performant-and-scalable" class="is-size-4-desktop is-size-6-touch">Performant and scalable<a href="#performant-and-scalable" class="anchor">#</a></h4><p>Built from the ground up with speed and scalability as a main concern. It is ready to power web applications big and small.</p>
+</div><div class="additional-attributes column is-4"><h4 id="production-ready" class="is-size-4-desktop is-size-6-touch">Production ready<a href="#production-ready" class="anchor">#</a></h4><p>Out of the box, it comes bundled with a web server ready to power your web applications.</p>
+</div><div class="additional-attributes column is-4"><h4 id="trusted-by-millions" class="is-size-4-desktop is-size-6-touch">Trusted by millions<a href="#trusted-by-millions" class="anchor">#</a></h4><p>Sanic is one of the overall most popular frameworks on PyPI, and the top async enabled framework</p>
+</div><div class="additional-attributes column is-4"><h4 id="community-driven" class="is-size-4-desktop is-size-6-touch">Community driven<a href="#community-driven" class="anchor">#</a></h4><p>The project is maintained and run by the community for the community.</p>
+</div></div><div class="additional-attributes is-size-3 mt-6"><p><strong>With the features and tools you'd expect.</strong></p>
+</div><div class="additional-attributes is-size-3 ml-6"><p><strong>And some <span class="has-text-primary">you wouldn't believe</span>.</strong></p>
+</div><div class="tab-container mt-6"><div class="tabs"><ul>
+<li><a>Production-grade</a><div class="tab-content"><p>After installing, Sanic has all the tools you need for a scalable, production-grade server—out of the box!</p>
+<p>Including <a href="/en/guide/how-to/tls.html" hx-get="/en/guide/how-to/tls.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true">full TLS support</a>.</p>
+<div class="code-block"><div class="highlight language-python"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sanic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sanic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sanic.response</span><span class="w"> </span><span class="kn">import</span> <span class="n">text</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Sanic</span><span class="p">(</span><span class="s2">&quot;MyHelloWorldApp&quot;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">text</span><span class="p">(</span><span class="s2">&quot;Hello, world.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><div class="code-block"><div class="highlight language-sh"><pre><span></span><code>sanic<span class="w"> </span>path.to.server:app
+<span class="o">[</span><span class="m">2023</span>-01-31<span class="w"> </span><span class="m">12</span>:34:56<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">999996</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Sanic<span class="w"> </span>v22.12.0
+<span class="o">[</span><span class="m">2023</span>-01-31<span class="w"> </span><span class="m">12</span>:34:56<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">999996</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Goin<span class="err">&#39;</span><span class="w"> </span>Fast<span class="w"> </span>@<span class="w"> </span>http://127.0.0.1:8000
+<span class="o">[</span><span class="m">2023</span>-01-31<span class="w"> </span><span class="m">12</span>:34:56<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">999996</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>mode:<span class="w"> </span>production,<span class="w"> </span>single<span class="w"> </span>worker
+<span class="o">[</span><span class="m">2023</span>-01-31<span class="w"> </span><span class="m">12</span>:34:56<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">999996</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>server:<span class="w"> </span>sanic,<span class="w"> </span>HTTP/1.1
+<span class="o">[</span><span class="m">2023</span>-01-31<span class="w"> </span><span class="m">12</span>:34:56<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">999996</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>python:<span class="w"> </span><span class="m">3</span>.10.9
+<span class="o">[</span><span class="m">2023</span>-01-31<span class="w"> </span><span class="m">12</span>:34:56<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">999996</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>platform:<span class="w"> </span>SomeOS-9.8.7
+<span class="o">[</span><span class="m">2023</span>-01-31<span class="w"> </span><span class="m">12</span>:34:56<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">999996</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>packages:<span class="w"> </span>sanic-routing<span class="o">==</span><span class="m">22</span>.8.0
+<span class="o">[</span><span class="m">2023</span>-01-31<span class="w"> </span><span class="m">12</span>:34:56<span class="w"> </span>+0000<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">999997</span><span class="o">]</span><span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Starting<span class="w"> </span>worker<span class="w"> </span><span class="o">[</span><span class="m">999997</span><span class="o">]</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div></div>
+</li>
+<li><a>TLS server</a><div class="tab-content"><p>Running Sanic with TLS enabled is as simple as passing it the file paths...</p>
+<div class="code-block"><div class="highlight language-sh"><pre><span></span><code>sanic<span class="w"> </span>path.to.server:app<span class="w"> </span>--cert<span class="o">=</span>/path/to/bundle.crt<span class="w"> </span>--key<span class="o">=</span>/path/to/privkey.pem
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><p>... or the a directory containing <code>fullchain.pem</code> and <code>privkey.pem</code></p>
+<div class="code-block"><div class="highlight language-sh"><pre><span></span><code>sanic<span class="w"> </span>path.to.server:app<span class="w"> </span>--tls<span class="o">=</span>/path/to/certs
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><p><strong>Even better</strong>, while you are developing, let Sanic handle setting up local TLS certificates so you can access your site over TLS at <a href="https://localhost:8443" target="_blank" rel="nofollow noreferrer">https://localhost:8443</a></p>
+<div class="code-block"><div class="highlight language-sh"><pre><span></span><code>sanic<span class="w"> </span>path.to.server:app<span class="w"> </span>--dev<span class="w"> </span>--auto-tls
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div></div>
+</li>
+<li><a>Websockets</a><div class="tab-content"><p>Up and running with websockets in no time using the <a href="https://websockets.readthedocs.io" target="_blank" rel="nofollow noreferrer">websockets</a> package.</p>
+<div class="code-block"><div class="highlight language-python"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sanic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">Websocket</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">websocket</span><span class="p">(</span><span class="s2">&quot;/feed&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">feed</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">ws</span><span class="p">:</span> <span class="n">Websocket</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">ws</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div></div>
+</li>
+<li><a>Static files</a><div class="tab-content"><p>Serving static files is of course intuitive and easy. Just name an endpoint and either a file or directory that should be served.</p>
+<div class="code-block"><div class="highlight language-python"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">static</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/index.html&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">static</span><span class="p">(</span><span class="s2">&quot;/uploads/&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/uploads/&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><p>Moreover, serving a directory has two additional features: automatically serving an index, and automatically serving a file browser.</p>
+<p>Sanic can automatically serve <code>index.html</code> (or any other named file) as an index page in a directory or its subdirectories.</p>
+<div class="code-block"><div class="highlight language-python"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">static</span><span class="p">(</span>
+    <span class="s2">&quot;/uploads/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;/path/to/uploads/&quot;</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="s2">&quot;index.html&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><p>And/or, setup Sanic to display a file browser.</p>
+<p><img src="/assets/images/directory-view.png" alt="image" /></p>
+<div class="code-block"><div class="highlight language-python"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">static</span><span class="p">(</span>
+    <span class="s2">&quot;/uploads/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;/path/to/uploads/&quot;</span><span class="p">,</span>
+    <span class="n">directory_view</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div></div>
+</li>
+<li><a>Lifecycle</a><div class="tab-content"><p>Beginning or ending a route with functionality is as simple as adding a decorator.</p>
+<div class="code-block"><div class="highlight language-python"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">on_request</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add_key</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="s2">&quot;bar&quot;</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">on_response</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">custom_banner</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;X-Foo&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">foo</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><p>Same with server events.</p>
+<div class="code-block"><div class="highlight language-python"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">before_server_start</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">setup_db</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">db_pool</span> <span class="o">=</span> <span class="k">await</span> <span class="n">db_setup</span><span class="p">()</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">after_server_stop</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">setup_db</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">app</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">db_pool</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><p>But, Sanic also allows you to tie into a bunch of built-in events (called signals), or create and dispatch your own.</p>
+<div class="code-block"><div class="highlight language-python"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="s2">&quot;http.lifecycle.complete&quot;</span><span class="p">)</span>  <span class="c1"># built-in</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_signal_handler</span><span class="p">(</span><span class="n">conn_info</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connection has been closed&quot;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="s2">&quot;something.happened.ohmy&quot;</span><span class="p">)</span>  <span class="c1"># custom</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_signal_handler</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;something happened&quot;</span><span class="p">)</span>
+
+<span class="k">await</span> <span class="n">app</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="s2">&quot;something.happened.ohmy&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div></div>
+</li>
+<li><a>Smart error handling</a><div class="tab-content"><p>Raising errors will intuitively result in proper HTTP errors:</p>
+<div class="code-block"><div class="highlight language-python"><pre><span></span><code><span class="k">raise</span> <span class="n">sanic</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">NotFound</span>  <span class="c1"># Automatically responds with HTTP 404</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><p>Or, make your own:</p>
+<div class="code-block"><div class="highlight language-python"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sanic.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">SanicException</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TeapotError</span><span class="p">(</span><span class="n">SanicException</span><span class="p">):</span>
+    <span class="n">status_code</span> <span class="o">=</span> <span class="mi">418</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Sorry, I cannot brew coffee&quot;</span>
+
+<span class="k">raise</span> <span class="n">TeapotError</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><p>And, when an error does happen, Sanic's beautiful DEV mode error page will help you drill down to the bug quickly.</p>
+<p><img src="../assets/images/error-div-by-zero.png" alt="image" /></p>
+<p>Regardless, Sanic comes with an algorithm that attempts to respond with HTML, JSON, or text-based errors as appropriate. Don't worry, it is super easy to setup and customize your error handling to your exact needs.</p>
+</div>
+</li>
+<li><a>App Inspector</a><div class="tab-content"><p>Check in on your live, running applications (whether local or remote).</p>
+<div class="code-block"><div class="highlight language-sh"><pre><span></span><code>sanic<span class="w"> </span>inspect<span class="w">      </span>
+
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│<span class="w">                                                        </span>Sanic<span class="w">                                                        </span>│
+│<span class="w">                                          </span>Inspecting<span class="w"> </span>@<span class="w"> </span>http://localhost:6457<span class="w">                                         </span>│
+├───────────────────────┬─────────────────────────────────────────────────────────────────────────────────────────────┤
+│<span class="w">                       </span>│<span class="w">     </span>mode:<span class="w"> </span>production,<span class="w"> </span>single<span class="w"> </span>worker<span class="w">                                                         </span>│
+│<span class="w">     </span>▄███<span class="w"> </span>█████<span class="w"> </span>██<span class="w">     </span>│<span class="w">   </span>server:<span class="w"> </span>unknown<span class="w">                                                                           </span>│
+│<span class="w">    </span>██<span class="w">                 </span>│<span class="w">   </span>python:<span class="w"> </span><span class="m">3</span>.10.9<span class="w">                                                                            </span>│
+│<span class="w">     </span>▀███████<span class="w"> </span>███▄<span class="w">     </span>│<span class="w"> </span>platform:<span class="w"> </span>SomeOS-9.8.7
+│<span class="w">                 </span>██<span class="w">    </span>│<span class="w"> </span>packages:<span class="w"> </span><span class="nv">sanic</span><span class="o">==</span><span class="m">22</span>.12.0,<span class="w"> </span>sanic-routing<span class="o">==</span><span class="m">22</span>.8.0,<span class="w"> </span>sanic-testing<span class="o">==</span><span class="m">22</span>.12.0,<span class="w"> </span>sanic-ext<span class="o">==</span><span class="m">22</span>.12.0<span class="w"> </span>│
+│<span class="w">    </span>████<span class="w"> </span>████████▀<span class="w">     </span>│<span class="w">                                                                                             </span>│
+│<span class="w">                       </span>│<span class="w">                                                                                             </span>│
+│<span class="w"> </span>Build<span class="w"> </span>Fast.<span class="w"> </span>Run<span class="w"> </span>Fast.<span class="w"> </span>│<span class="w">                                                                                             </span>│
+└───────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Sanic-Main
+<span class="w">    </span>pid:<span class="w"> </span><span class="m">999996</span>
+
+Sanic-Server-0-0
+<span class="w">    </span>server:<span class="w"> </span>True
+<span class="w">    </span>state:<span class="w"> </span>ACKED
+<span class="w">    </span>pid:<span class="w"> </span><span class="m">999997</span>
+<span class="w">    </span>start_at:<span class="w"> </span><span class="m">2023</span>-01-31T12:34:56.00000+00:00
+<span class="w">    </span>starts:<span class="w"> </span><span class="m">1</span>
+
+Sanic-Inspector-0
+<span class="w">    </span>server:<span class="w"> </span>False
+<span class="w">    </span>state:<span class="w"> </span>STARTED
+<span class="w">    </span>pid:<span class="w"> </span><span class="m">999998</span>
+<span class="w">    </span>start_at:<span class="w"> </span><span class="m">2023</span>-01-31T12:34:56.00000+00:00
+<span class="w">    </span>starts:<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><p>And, issue commands like <code>reload</code>, <code>shutdown</code>, <code>scale</code>...</p>
+<div class="code-block"><div class="highlight language-sh"><pre><span></span><code>sanic<span class="w"> </span>inspect<span class="w"> </span>scale<span class="w"> </span><span class="m">4</span>
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div><p>... or even create your own!</p>
+<div class="code-block"><div class="highlight language-sh"><pre><span></span><code>sanic<span class="w"> </span>inspect<span class="w"> </span>migrations
+</code></pre></div>
+<div class="code-block__copy" onclick="copyCode(this)"><div class="code-block__rectangle code-block__filled"></div><div class="code-block__rectangle code-block__outlined"></div></div></div></div>
+</li>
+<li><a>Extendable</a><div class="tab-content"><p>In addition to the tools that Sanic comes with, the officially supported <a href="./plugins/sanic-ext/getting-started.html" hx-get="./plugins/sanic-ext/getting-started.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true">Sanic Extensions</a> provides lots of extra goodies to make development easier.</p>
+<ul depth="0" class="ul"><li class="li"><strong>CORS</strong> protection</li><li class="li">Template rendering with <strong>Jinja</strong></li><li class="li"><strong>Dependency injection</strong> into route handlers</li><li class="li">OpenAPI documentation with <strong>Redoc</strong> and/or <strong>Swagger</strong></li><li class="li">Predefined, endpoint-specific response <strong>serializers</strong></li><li class="li">Request query arguments and body input <strong>validation</strong></li><li class="li"><strong>Auto create</strong> HEAD, OPTIONS, and TRACE endpoints</li><li class="li">Live <strong>health monitor</strong></li></ul></div>
+</li>
+<li><a>Developer Experience</a><div class="tab-content"><p>Sanic is <strong>built for building</strong>.</p>
+<p>From the moment it is installed, Sanic includes helpful tools to help the developer get their job done.</p>
+<ul depth="0" class="ul"><li class="li"><strong>One server</strong> - Develop locally in DEV mode on the same server that will run your PRODUCTION application</li><li class="li"><strong>Auto reload</strong> - Reload running applications every time you save a Python file, but also auto-reload <strong>on any arbitrary directory</strong> like HTML template directories</li><li class="li"><strong>Debugging tools</strong> - Super helpful (and beautiful) <a href="/en/guide/best-practices/exceptions.html" hx-get="/en/guide/best-practices/exceptions.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true">error pages</a> that help you traverse the trace stack easily</li><li class="li"><strong>Auto TLS</strong> - Running a localhost website with <code>https</code> can be difficult, <a href="/en/guide/how-to/tls.html" hx-get="/en/guide/how-to/tls.html" hx-target="#content" hx-swap="innerHTML" hx-push-url="true">Sanic makes it easy</a></li><li class="li"><strong>Streamlined testing</strong> - Built-in testing capabilities, making it easier for developers to create and run tests, ensuring the quality and reliability of their services</li><li class="li"><strong>Modern Python</strong> - Thoughtful use of type hints to help the developer IDE experience</li></ul></div>
+</li>
+</ul></div><div class="tab-display"></div></div>
+</div><footer class="footer mb-0 mt-6"><div class="content has-text-centered"><p><a href="https://github.com/sanic-org/sanic/blob/master/LICENSE" target="_blank" rel="nofollow noopener noreferrer">MIT Licensed</a><br><small>Copyright © 2018-2025 Sanic Community Organization</small><p><a href="/en/built-with-sanic.html">This site is powered</a><img src="/assets/images/sanic-framework-logo-circle-32x32.png" alt="Sanic Logo" style="vertical-align: middle;" class="ml-1"><p>~ Made with ❤️ and ☕️ ~</div></footer>
