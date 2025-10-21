@@ -4,11 +4,14 @@ from fastapi import FastAPI
 
 # 修复导入路径
 from fastapi_crud.apps.controller.role import role_router
+from fastapi_crud.apps.controller.test import test_router
 
 
 def register_router(app: FastAPI):
     """注册所有路由"""
     # 注册角色路由
     app.include_router(role_router)
+    # 注册测试路由
+    app.include_router(test_router)
     print("注册路由成功")
     return True
